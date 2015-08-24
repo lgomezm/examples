@@ -1,0 +1,99 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello World Ember</title>
+    <script src="js/libs/jquery-1.11.2.min.js"></script>
+    <script src="js/libs/handlebars-v1.3.0.js"></script>
+    <script src="js/libs/ember.js"></script>
+    <script src="js/libs/ember-data.js"></script>
+  </head>
+<body>
+  <script type="text/x-handlebars">
+    <h1>Hello World Ember JS</h1>
+    <table>
+      <tr>
+        <td>{{#link-to 'index'}}Home{{/link-to}}</td>
+        <td>{{#link-to 'about'}}About{{/link-to}}</td>
+        <td>{{#link-to 'customer'}}Customer{{/link-to}}</td>
+        <td>{{#link-to 'blog'}}Blog{{/link-to}}</td>
+      </tr>
+    </table>
+    {{outlet}}
+  </script>
+
+  <script type="text/x-handlebars" id="index-temp">
+    <p>
+      {{input type="text" value=firstName}}
+      {{input type="text" value=lastName}}
+      {{fullName}}
+    </p>
+    <ul>
+      {{#each item in model}}
+        <li>{{item}}</li>
+      {{/each}}
+    </ul>
+    <a href="" {{action 'goToAbout'}}>About Redirect</a>
+    {{makeShorter 'HolaMundo'}}
+    <a href="" {{action 'addNewColor'}}>New Color</a>
+    <br>
+    <button {{action 'callAboutController'}}>Call from About</button>
+  </script>
+
+  <script type="text/x-handlebars" id="about">
+    <h2 {{action 'titleClick'}}>This is the about page</h2>
+    <p>Please contact us by any of the following:</p>
+    <ul>
+      <li>Email: {{email}}</li>
+      <li>Phone number: {{phone}}</li>
+      <li>Address: {{address}}</li>
+      <li>Other: {{other}}</li>
+    </ul>
+    <form>
+      {{input type="text" value=message}}
+      <button {{action 'handleSubmit'}}>Send Message</button>
+    </form>
+    <button {{action 'callIndexController'}}>Call from Index</button>
+  </script>
+
+  <script type="text/x-handlebars" id="customer">
+    <a href="" {{action 'alertCustomer'}}>Alert Customer</a>
+    <a href="" {{action 'modifyCustomer'}}>Modify Customer</a>
+    <p>{{fullName}}</p>
+    <ul>
+      {{#each customer in model}}
+        <li>{{customer.firstName}} {{customer.lastName}}, {{customer.age}}</li>
+      {{/each}}
+    </ul>
+  </script>
+
+  <script type="text/x-handlebars" id="blog">
+    <h2>Welcome to our blog</h2>
+    <ul>
+      {{#each}}
+        <li>{{#link-to 'article' this}}{{title}}{{/link-to}}</li>
+      {{/each}}
+    </ul>
+    <p>Owner: {{owner}}</p>
+  </script>
+
+  <script type="text/x-handlebars" id="article">
+    <h2>{{title}}</h2>
+    <p>{{body}}</p>
+    <h3>Comments</h3>
+    <ul>
+      {{#each comments}}
+      <li>{{text}}</li>
+      {{/each}}
+    </ul>
+  </script>
+
+  <script src="js/application.js"></script>
+	<script src="js/router.js"></script>
+  <script src="js/controllers/index-controller.js"></script>
+  <script src="js/controllers/about-controller.js"></script>
+  <script src="js/controllers/customer-controller.js"></script>
+  <script src="js/models/customer.js"></script>
+  <script src="js/models/article.js"></script>
+  <script src="js/models/comment.js"></script>
+</body>
+</html>
